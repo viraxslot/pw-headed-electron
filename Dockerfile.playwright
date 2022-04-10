@@ -9,7 +9,7 @@ WORKDIR /automation
 COPY --from=deps /tmp/deps.json ./package.json
 
 ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD 1
-RUN npm install
+RUN npm ci
 
 COPY . .
 
