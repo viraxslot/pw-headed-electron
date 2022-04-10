@@ -1,0 +1,21 @@
+name: Run electron tests
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build and run playwright in docker
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Build playwright image and run tests
+    - uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+        cache: 'npm'
+      run: |
+        npm run dkr:build:pw
+        npm run dkr:run
