@@ -1,0 +1,16 @@
+ARG PLAYWRIGHT_VERSION='v1.20.2'
+FROM mcr.microsoft.com/playwright:${PLAYWRIGHT_VERSION}-focal
+
+WORKDIR /automation
+COPY package.json ./
+RUN npm install
+
+COPY . ./
+
+ENV DEBUG=pw:*
+
+# Try with "Missing X server or $DISPLAY" error
+# CMD ["xvfb-run", "--auto-servernum", "--server-args=\"-screen 0 1280x960x24\"", "--", "npx", "playwright", "test"]
+
+# Try with no output at all
+CMD ["xvfb-run", "npx", "playwright", "test"]

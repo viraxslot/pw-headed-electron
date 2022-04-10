@@ -1,0 +1,22 @@
+{
+    "name": "electron-app",
+    "version": "1.0.0",
+    "description": "test electron",
+    "main": "src/main.js",
+    "scripts": {
+        "start": "electronmon .",
+        "test": "playwright test",
+        "dkr:build": "docker build -f Dockerfile.playwright -t playwright-tests .",
+        "dkr:run": "docker run --ipc=host --name playwright-tests playwright-tests",
+        "dc:pw": "docker-compose up -d --build",
+        "dc:down": "docker-compose down"
+    },
+    "author": "Alex Vershinin",
+    "license": "ISC",
+    "devDependencies": {
+        "@playwright/test": "^1.20.2",
+        "electron": "^18.0.3",
+        "electronmon": "^2.0.2",
+        "playwright": "^1.20.2"
+    }
+}

@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+    playwright:
+        container_name: playwright-electron
+        build:
+            context: .
+            dockerfile: Dockerfile.playwright
+        ipc: 'host'
+        environment:
+            DISPLAY: ${DISPLAY:-:99}
+            DEBUG: "pw:*"
+        command: 'xvfb-run npm test'
