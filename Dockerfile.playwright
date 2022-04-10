@@ -11,7 +11,6 @@ COPY --from=deps /tmp/deps.json ./package.json
 ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD 1
 RUN npm install --loglevel verbose
 
-RUN npx playwright install --with-deps chromium
 COPY . .
 
 ENTRYPOINT ["/automation/entrypoint.sh"]
