@@ -4,7 +4,7 @@ const config: PlaywrightTestConfig = {
     timeout: 30000,
     globalTimeout: 5000,
     reporter: 'list',
-    testDir: './test/chrome',
+    testDir: './test/electron',
     use: {
         headless: false,
     },

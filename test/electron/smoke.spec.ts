@@ -18,6 +18,14 @@ test.describe('main suite', function () {
         await expect(header).toHaveText('Hello World!');
     });
 
+    test('check div text', async () => {
+        const window = await electronApp.firstWindow();
+
+        await window.waitForSelector('data-test-id=main-header');
+        const header = window.locator('data-test-id=random-text');
+        await expect(header).toHaveText('it works');
+    });
+
     test.afterEach(async () => {
         await electronApp.close();
     });

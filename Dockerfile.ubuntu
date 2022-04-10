@@ -1,0 +1,27 @@
+FROM ubuntu:20.04
+USER root
+
+RUN apt-get update -y && \
+    apt-get upgrade -y && \
+    apt-get install -y
+
+RUN apt-get install -y curl
+
+ENV NODE_VERSION=16
+RUN curl -sL https://deb.nodesource.com/setup_$NODE_VERSION.x | bash - && \
+    apt-get install -y nodejs
+
+RUN node --version
+RUN npm i -g npm@8.3
+
+WORKDIR /app
+COPY package.json .
+
+ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD 1
+RUN npm install
+RUN npx playwright install --with-deps chromium
+
+COPY . .
+# RUN xvfb-run --auto-servernum --server-args="-screen 0 1280x960x24" -- npm test
+
+ENTRYPOINT [ "entrypoint.sh" ]
